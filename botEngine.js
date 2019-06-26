@@ -15,24 +15,37 @@ const postTweet = function(tweet){
   })
 }
 
+//Post a imagen
 
-/*
-//Verify credentials
-const getCredentials = T.get('account/verify_credentials', { skip_status: true })
-  .catch(function (err) {
-    console.log('caught error', err.stack)
+// first we must post the media to Twitter
+const postImagen = function(media){
+  T.post('media/upload', { media_data: media }, function (err, data, response) {
+    // now we can assign alt text to the media, for use by screen readers and
+    // other text-based presentations and interpreters
+    var mediaIdStr = data.media_id_string
+    var altText = "Small flowers in a planter on a sunny balcony, blossoming."
+    var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } }
+
+    T.post('media/metadata/create', meta_params, function (err, data, response) {
+      if (!err) {
+        // now we can reference the media and post a tweet (media will attach to the tweet)
+        var params = { status: 'loving life #nofilter', media_ids: [mediaIdStr] }
+
+        T.post('statuses/update', params, function (err, data, response) {
+          if(err){
+            console.log("error");
+          }
+          else {
+            console.log("succes!");
+          }
+        })
+      }
+    })
   })
-  .then(function (result) {
-    // `result` is an Object with keys "data" and "resp".
-    // `data` and `resp` are the same objects as the ones passed
-    // to the callback.
-    // See https://github.com/ttezel/twit#tgetpath-params-callback
-    // for details.
-    console.log('data', result.data);
-  })
-*/
+}
 
 
 module.exports = {
-  postTweet: postTweet
+  postTweet: postTweet,
+  postImagen: postImagen
 }

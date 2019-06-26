@@ -11,10 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "file-system": "^2.2.2",
     "heroku": "^7.25.0",
     "node": "^12.4.0",
     "promise": "^8.0.3",
     "request": "^2.88.0",
     "twit": "^2.2.11"
+  },
+  "engines": {
+    "node": "11.x"
   }
 }
