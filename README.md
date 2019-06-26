@@ -2,7 +2,7 @@
 This twitter bot tweets movies based on my criterea of "good movies".
 
 ### Functionalities:
-*Daily suggestion of a movie.
+* Daily suggestion of a movie.
 
 ## APIS
 Im using "The Movie Database (TMDb)" API to get the movies. I filtrate the movies with some params to only obtain realative "new good movies" with a rate above 7(good movies in my opinion and new means above 2008).
