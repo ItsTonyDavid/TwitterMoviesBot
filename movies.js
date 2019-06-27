@@ -4,7 +4,7 @@ const bot = require('./botEngine.js');
 const request = require('request');
 const promise = require('promise');
 const fs = require('file-system');
-const tmdbCredentials = credentials.movieDB;
+//const tmdbCredentials = credentials.movieDB;
 
 //Dates
 var dateObj = new Date();

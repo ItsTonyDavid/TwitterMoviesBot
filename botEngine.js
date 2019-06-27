@@ -1,8 +1,10 @@
-//const credentials = require('./credentials.js');
+/*
+const credentials = require('./credentials.js');
 const twitter_consumer_key = credentials.twitter_consumer_key;
 const twitter_consumer_secret = credentials.twitter_consumer_secret;
 const twitter_access_token = credentials.twitter_access_token;
 const twitter_access_token_secret = credentials.twitter_access_token_secret;
+*/
 
 const Twitter = {
   consumer_key: twitter_consumer_key,
