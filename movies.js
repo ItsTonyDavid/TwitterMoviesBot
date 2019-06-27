@@ -58,12 +58,12 @@ const getDailyMovie = function(callback){
   movieURL += '&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=' + page;
   movieURL += '&primary_release_date.gte=2008-01-01&vote_count.gte=100&vote_average.gte=7&without_genres=99';
   request({ url: movieURL, json: true}, function(error, response) {
-    console.log(page = '\n');
     if (error) {
       callback('Service unavailable', undefined);
     }
     else {
       var movies = response.body.results;
+      console.log(movies);
       var randomMovie = getRandomMovie(movies.length);
       var movieObj = movies[randomMovie];
       console.log(movieURL);
