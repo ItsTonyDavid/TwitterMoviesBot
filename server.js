@@ -1,6 +1,7 @@
 const movies = require("./movies.js");
 const bot = require("./botEngine")
 
+
 function postdaily(){
   movies.getDailyMovie(function(error,response){
       if(response){
@@ -15,15 +16,3 @@ function postdaily(){
 
 postdaily();
 setInterval(postdaily, 1000*60*60*24);
-
-/*
-movies.getMovieImg(function(error, response){
-  if(response){
-    bot.postImagen(response);
-    console.log("worked?");
-  }
-  else{
-    console.log(error);
-  }
-});
-*/

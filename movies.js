@@ -1,10 +1,9 @@
 //Require things
-//const credentials = require('./credentials.js');
 const bot = require('./botEngine.js');
 const request = require('request');
 const promise = require('promise');
 const fs = require('file-system');
-//const tmdbCredentials = credentials.movieDB;
+const tmdbCredentials = process.env.movieDB;
 
 //Dates
 var dateObj = new Date();
