@@ -1,4 +1,3 @@
-/*
 const movies = require("./movies.js");
 const bot = require("./botEngine")
 
@@ -14,9 +13,7 @@ function postdaily(){
       }
   });
 }
-*/
 
-//postdaily();
-//setInterval(postdaily, 1000*60*60*24);
 
-console.log(process.env.NODE_ENV);
+postdaily();
+setInterval(postdaily, 1000*60*60*24);

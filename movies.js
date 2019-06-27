@@ -3,7 +3,7 @@ const bot = require('./botEngine.js');
 const request = require('request');
 const promise = require('promise');
 const fs = require('file-system');
-const tmdbCredentials = process.env.movieDB;
+var tmdbCredentials = getCredentials();
 
 //Dates
 var dateObj = new Date();
@@ -13,6 +13,18 @@ var year = dateObj.getUTCFullYear();
 var suggestedLimitDate = year + "-" + (month-2) + "-" + day;
 
 //Global functions that may work in many functions.
+
+function getCredentials(){
+  if ( process.env.NODE_ENV === 'production') {
+      var tmdbCredentials2 = process.env.movieDB;
+      return tmdbCredentials2
+  }
+  else {
+      var credentials = require('./credentials.js')
+      var tmdbCredentials2 = credentials.movieDB;
+      return tmdbCredentials2
+  }
+}
 
 function random(min, max) { //Normal random funciton
     min = Math.ceil(min);
@@ -39,9 +51,9 @@ const getNameAndDescription = function(movie){//get name and description of a mo
   };
 }
 
-
 //IMPORTANT FUNCTIONS
 const getDailyMovie = function(callback){
+  getCredentials();
   var page = getRandomPage(41);
   var movieURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbCredentials;
   movieURL += '&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=' + page;
@@ -84,4 +96,4 @@ module.exports={
 };
 
 
-var weeklyNewMovieURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbCredentials + '&with_release_type=2|3&region=US';
+//var weeklyNewMovieURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbCredentials + '&with_release_type=2|3&region=US';
