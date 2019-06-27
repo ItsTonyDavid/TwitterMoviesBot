@@ -1,7 +1,18 @@
-const credentials = require('./credentials.js');
-const Twit = require('twit');
+//const credentials = require('./credentials.js');
+const twitter_consumer_key = credentials.twitter_consumer_key;
+const twitter_consumer_secret = credentials.twitter_consumer_secret;
+const twitter_access_token = credentials.twitter_access_token;
+const twitter_access_token_secret = credentials.twitter_access_token_secret;
 
-var T = new Twit(credentials.twitter);
+const Twitter = {
+  consumer_key: twitter_consumer_key,
+  consumer_secret: twitter_consumer_secret,
+  access_token: twitter_access_token,
+  access_token_secret: twitter_access_token_secret
+}
+
+const Twit = require('twit');
+var T = new Twit(Twitter);
 
 //Post a tweet
 const postTweet = function(tweet){
