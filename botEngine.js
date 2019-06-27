@@ -3,7 +3,7 @@ const Twit = require('twit');
 const twitterCredentials = getCredentials();
 
 function getCredentials(){
-  if ( process.env.NODE_ENV === 'production') {
+  if ( process.env.NODE_ENV == 'production') {
     const twitterCredentials2 = {
       consumer_key: process.env.twitter_consumer_key,
       consumer_secret: process.env.twitter_consumer_secret,

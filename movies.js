@@ -15,7 +15,7 @@ var suggestedLimitDate = year + "-" + (month-2) + "-" + day;
 //Global functions that may work in many functions.
 
 function getCredentials(){
-  if ( process.env.NODE_ENV === 'production') {
+  if ( process.env.NODE_ENV == 'production') {
       var tmdbCredentials2 = process.env.movieDB;
       return tmdbCredentials2
   }
