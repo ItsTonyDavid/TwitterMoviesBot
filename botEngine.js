@@ -1,4 +1,3 @@
-const credentials = require('./credentials.js')
 const Twit = require('twit');
 const twitterCredentials = getCredentials();
 
