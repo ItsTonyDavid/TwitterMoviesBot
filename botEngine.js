@@ -13,7 +13,7 @@ function getCredentials(){
     return twitterCredentials2;
   }
   else {
-      const credentials = require('./credentials.js')
+      const credentials = require('./credentials')
       const twitterCredentials2 = {
         consumer_key: credentials.twitter_consumer_key,
         consumer_secret: credentials.twitter_consumer_secret,

@@ -20,7 +20,7 @@ function getCredentials(){
       return tmdbCredentials2
   }
   else {
-      var credentials = require('./credentials.js')
+      var credentials = require('./credentials')
       var tmdbCredentials2 = credentials.movieDB;
       return tmdbCredentials2
   }
