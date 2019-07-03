@@ -2,7 +2,14 @@
 const request = require('request');
 const promise = require('promise');
 const fs = require('file-system');
-var tmdbCredentials = getCredentials();
+
+if ( process.env.NODE_ENV == 'production') {
+    var tmdbCredentials = process.env.movieDB;
+}
+else {
+    var credentials = require('./credentials')
+    var tmdbCredentials = credentials.movieDB;
+}
 
 //Dates
 var dateObj = new Date();
@@ -12,18 +19,6 @@ var year = dateObj.getUTCFullYear();
 var suggestedLimitDate = year + "-" + (month-2) + "-" + day;
 
 //Global functions that may work in many functions.
-
-function getCredentials(){
-  if ( process.env.NODE_ENV == 'production') {
-      var tmdbCredentials2 = process.env.movieDB;
-      return tmdbCredentials2
-  }
-  else {
-      var credentials = require('./credentials')
-      var tmdbCredentials2 = credentials.movieDB;
-      return tmdbCredentials2
-  }
-}
 
 function random(min, max) { //Normal random funciton
     min = Math.ceil(min);
@@ -50,9 +45,10 @@ const getNameAndDescription = function(movie){//get name and description of a mo
   };
 }
 
+/* -------- IMPORTANT FUNCTIONS -------- */
+
 //IMPORTANT FUNCTIONS
-const getDailyMovie = function(callback){
-  getCredentials();
+function getDailyMovie(callback){
   var page = getRandomPage(41);
   var movieURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbCredentials;
   movieURL += '&language=en-US&region=US&sort_by=vote_average.desc&include_adult=false&include_video=false&page=' + page;
@@ -63,16 +59,16 @@ const getDailyMovie = function(callback){
     }
     else {
       var movies = response.body.results;
-      console.log(movies);
       var randomMovie = getRandomMovie(movies.length);
       var movieObj = movies[randomMovie];
-      console.log(movieURL);
-      console.log(movieObj);
       callback(undefined, getNameAndDescription(movieObj));
     }
   });
 }
 
+
+
+// UNFINISHED FUNCTION
 const getMovieImg = function(callback){
   url = "http://image.tmdb.org/t/p/w185/p2SdfGmQRaw8xhFbexlHL7srMM8.jpg";
   request({ url: url, json: true}, function(error, response){
@@ -90,8 +86,7 @@ const getMovieImg = function(callback){
 
 
 module.exports={
-    getDailyMovie: getDailyMovie,
-    getMovieImg: getMovieImg
+    getDailyMovie: getDailyMovie
 };
 
 
