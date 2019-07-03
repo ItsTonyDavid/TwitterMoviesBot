@@ -1,7 +1,7 @@
 const movies = require("./movies.js");
 const bot = require("./botEngine");
 
-var postdaily = movies.getDailyMovie(function(error,response){
+movies.getDailyMovie(function(error,response){
   if(error){
     //console.log('ptm error');
   }
