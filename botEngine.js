@@ -21,17 +21,15 @@ const Twit = require('twit');
 var T = new Twit(twitterCredentials);
 
 //Post a tweet
-const postTweet = function(tweet){
+const postTweet = function(tweet, callback){
   T.post('statuses/update', { status: tweet }, function(err, data, response) {
-    return ;
-    /*
     if(err){
-      console.log(err);
+      callback(err, undefined)
     }
     else{
-      console.log("Tweet published");
+      callback(undefined, true);
     }
-    */
+
   })
 }
 
