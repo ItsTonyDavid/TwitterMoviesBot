@@ -23,12 +23,14 @@ var T = new Twit(twitterCredentials);
 //Post a tweet
 const postTweet = function(tweet){
   T.post('statuses/update', { status: tweet }, function(err, data, response) {
+    /*
     if(err){
       console.log(err);
     }
     else{
       console.log("Tweet published");
     }
+    */
   })
 }
 

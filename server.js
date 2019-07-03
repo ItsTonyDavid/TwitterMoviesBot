@@ -3,10 +3,10 @@ const bot = require("./botEngine");
 
 movies.getDailyMovie(function(error,response){
   if(error){
-    console.log('ptm error');
+    //console.log('ptm error');
   }
   else{
-    console.log(response.name);
+    //console.log(response.name);
     bot.postTweet('Sugested movie: ' + response.name);
   }
 });
