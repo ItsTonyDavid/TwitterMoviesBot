@@ -1,7 +1,7 @@
 //Require things
 const request = require('request');
 const promise = require('promise');
-const fs = require('file-system');
+const fs = require('fs');
 
 if ( process.env.NODE_ENV == 'production') {
     var tmdbCredentials = process.env.movieDB;
@@ -38,10 +38,11 @@ function getRandomMovie(numOfMovies){ //Selects a random movie position dependin
   return random(0, numOfMovies-1)
 }
 
-const getNameAndDescription = function(movie){//get name and description of a movie object
+const getMovieInfo = function(movie){//get name and description of a movie object
   return {
     name: movie.title,
-    descrip: movie.overview
+    descrip: movie.overview,
+    photoURL: "https://image.tmdb.org/t/p/w500" + movie.poster_path
   };
 }
 
@@ -61,32 +62,28 @@ function getDailyMovie(callback){
       var movies = response.body.results;
       var randomMovie = getRandomMovie(movies.length);
       var movieObj = movies[randomMovie];
-      callback(undefined, getNameAndDescription(movieObj));
+      callback(undefined, getMovieInfo(movieObj));
     }
   });
-}
+};
 
-
-
-// UNFINISHED FUNCTION
-const getMovieImg = function(callback){
-  url = "http://image.tmdb.org/t/p/w185/p2SdfGmQRaw8xhFbexlHL7srMM8.jpg";
-  request({ url: url, json: true}, function(error, response){
-    if(error){
-      callback('service unavailable', undefined);
-    }
-    else{
-      var rawImg = response.body;
-      var imgBase64 = btoa(rawImg);// convert to Base64
-      callback('undefined', imgBase64)
-    }
+function getMoviePoster(moviePhotoURl, callback){
+  request({url : moviePhotoURl, encoding : null}, function(error, response, body) {
+      //Writing the buffer to a file
+      fs.writeFile('./img/dailyMovie.png', body, { encoding : null}, function(err){
+          if (err){
+              callback(err, undefined);
+            }
+            else {
+              callback(undefined, true);
+            }
+      });
   });
-}
-
-
+};
 
 module.exports={
-    getDailyMovie: getDailyMovie
+    getDailyMovie: getDailyMovie,
+    getMoviePoster: getMoviePoster
 };
 
 
