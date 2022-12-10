@@ -10,7 +10,7 @@
   "author": "itsTonyDavid",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "heroku": "^7.25.0",
     "node": "^12.4.0",
     "promise": "^8.0.3",
